@@ -3,12 +3,14 @@
 =======
 #### Commands
 Create a AWS EKS Cluster,here we are using awscli to create the cluster.
+
 First create an IAM Role:
 ```
 aws iam create-role --role-name EKS-Cluster-Role --assume-role-policy-document file://trust-policy.json
 ```
 If the VPC and Subnets already exists fetch those values or create the new ones.
-Create the cluster:
+
+To Create the cluster:
 ```
 aws eks create-cluster --name my-eks-cluster --role-arn arn:aws:iam::<YOUR_ACCOUNT_ID>:role/EKS-Cluster-Role --resources-vpc-config subnetIds=<SUBNET_ID_1>,<SUBNET_ID_2>,securityGroupIds=<SECURITY_GROUP_ID>  --region <YOUR_REGION>
 ```
