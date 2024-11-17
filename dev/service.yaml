@@ -2,11 +2,25 @@ apiVersion: v1
 kind: Service
 metadata:
   name: myapp-service
+  namespace: argocd  # Add this if your service is in a specific namespace
+  annotations:
+    # Use AWS Load Balancer with SSL termination
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:eu-west-2:045070938661:certificate/b0f8947b-7163-44cb-8795-6c25813a8fdc
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+    service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "3600"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-negotiation-policy: "ELBSecurityPolicy-TLS-1-2-Ext-2018-06"
 spec:
+  type: LoadBalancer
   selector:
     app: myapp
   ports:
-  - port: 8080
-    protocol: TCP
-    targetPort: 8080
+    - name: http
+      port: 80
+      targetPort: 8080
+      protocol: TCP
+    - name: https
+      port: 443
+      targetPort: 8080
+      protocol: TCP
   
