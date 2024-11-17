@@ -4,7 +4,7 @@
 Create a AWS EKS Cluster,here we are using awscli to create the cluster.
 
 First create an IAM Role:
-=======
+
 Create a AWS EKS Cluster,here we are using eksctl to create the cluster.
 Install eksctl on macOS (using Homebrew)
 If you're using macOS and have Homebrew installed:
@@ -13,12 +13,6 @@ If you're using macOS and have Homebrew installed:
 brew tap weaveworks/tap 
 brew install weaveworks/tap/eksctl
 ```
-
-If the VPC and Subnets already exists fetch those values or create the new ones.
-
-To Create the cluster:
-```
-aws eks create-cluster --name my-eks-cluster --role-arn arn:aws:iam::<YOUR_ACCOUNT_ID>:role/EKS-Cluster-Role --resources-vpc-config subnetIds=<SUBNET_ID_1>,<SUBNET_ID_2>,securityGroupIds=<SECURITY_GROUP_ID>  --region <YOUR_REGION>
 
 Install eksctl on Linux (using curl)
 For Linux distributions, you can download the binary directly using curl:
@@ -31,9 +25,9 @@ rm eksctl.tar.gz
 Create the cluster:
 ```
 eksctl create cluster --name=eksdemo \
-                      --region=eu-west-2 \
-                      --zones=eu-west-2a,eu-west-2b \
-                      --without-nodegroup
+--region=eu-west-2 \
+--zones=eu-west-2a,eu-west-2b \
+--without-nodegroup
 ```
 To check the Cluster Status:
 ```
